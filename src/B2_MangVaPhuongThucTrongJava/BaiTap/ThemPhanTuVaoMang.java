@@ -7,31 +7,35 @@ public class ThemPhanTuVaoMang {
         int size;
         int[] array;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhap kich thuoc cua mang");
+        System.out.print("Nhap kich thuoc cua mang: ");
         size = scanner.nextInt();
-        array = new int[size];
+        array = new int[size +1];
         int i = 0;
-        while (i < array.length/2) {
+        while (i < (size)) {
             System.out.print("Nhap vao vi tri thu " + (i + 1) + " : ");
             array[i] = scanner.nextInt();
             i++;
         }
-        System.out.print("Phan tu trong mang la: ");
+        System.out.println("Phan tu trong mang la: ");
         for (int j = 0; j < array.length; j++) {
             System.out.print(array[j] + "\t");
         }
 
-        System.out.println("Nhap so can chen:");
+        System.out.println();
+        System.out.print("Nhap so can chen: ");
         int X = scanner.nextInt();
 
-        System.out.println("Chon vi tri can chen");
+        System.out.print("Chon vi tri can chen: ");
         int k = scanner.nextInt();
-        for (i=0; i<size; i++) {
-            if (i==k) {
-                array[i+1] = array[i];
-                array[k] = X;
+        if (k < 0 || k > array.length - 1) {
+            System.out.println("Khong the nhap vao vi tri nay!!!");
+        } else {
+            for (int j = array.length - 1; j > k; j--) {
+                array[j] = array[j - 1];
             }
         }
+        array[k] = X;
+        System.out.println("Mang sau khi them vao la: ");
         for (int j = 0; j < array.length; j++) {
             System.out.print(array[j] + "\t");
         }
