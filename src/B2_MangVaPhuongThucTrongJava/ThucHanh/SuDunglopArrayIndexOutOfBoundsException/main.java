@@ -1,5 +1,7 @@
 package B2_MangVaPhuongThucTrongJava.ThucHanh.SuDunglopArrayIndexOutOfBoundsException;
+
 import java.util.Scanner;
+
 public class main {
     public static void main(String[] args) {
         ArrayExample arrExample = new ArrayExample();
