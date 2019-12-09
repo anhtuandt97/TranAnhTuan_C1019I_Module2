@@ -16,6 +16,7 @@ public class Acount {
     };
 
     public void setc(double c) {
+
         this.c = c;
     };
 

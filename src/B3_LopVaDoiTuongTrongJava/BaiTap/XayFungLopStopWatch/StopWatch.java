@@ -1,4 +1,4 @@
-package B3_LopVaDoiTuongTrongJava.XayDungLopStopWatch;
+package B3_LopVaDoiTuongTrongJava.BaiTap.XayFungLopStopWatch;
 
 public class StopWatch {
     private double startTime;
@@ -29,14 +29,14 @@ public class StopWatch {
     }
 
     public static void main(String[] args) {
-        StopWatch stopWatch=new StopWatch();
+        StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        for(long i=0;i<10000000;i++) {
+        for (long i = 0; i < 10000000; i++) {
             Math.random();
         }
         stopWatch.end();
-        System.out.print("Thoi gian bat dau la: "+ stopWatch.getStartTime()+"\n");
-        System.out.print("Thoi gian ket thuc la: " + stopWatch.getEndTime()+"\n");
-        System.out.println("Thoi gian dem duoc la: "+stopWatch.getEscapTme());
+        System.out.print("Thoi gian bat dau la: " + stopWatch.getStartTime() + "\n");
+        System.out.print("Thoi gian ket thuc la: " + stopWatch.getEndTime() + "\n");
+        System.out.println("Thoi gian dem duoc la: " + stopWatch.getEscapTme());
     }
 }
