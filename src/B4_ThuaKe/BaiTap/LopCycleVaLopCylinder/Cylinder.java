@@ -4,6 +4,7 @@ public class Cylinder extends Circle {
     private double hight;
 
     public Cylinder() {
+        super();
     }
 
     public double getHight()
