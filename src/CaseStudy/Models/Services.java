@@ -2,7 +2,7 @@ package CaseStudy.Models;
 
 public abstract class Services {
     private String serviceName;
-    private  String useArea;
+    private  double useArea;
     private double rentFee;
     private int maxOfPeople;
     private String rentType;
@@ -11,7 +11,7 @@ public abstract class Services {
     public Services() {
     }
 
-    public Services(String serviceName, String useArea, double rentFee, int maxOfPeople, String rentType, String id) {
+    public Services(String serviceName, double useArea, double rentFee, int maxOfPeople, String rentType, String id) {
         this.serviceName = serviceName;
         this.useArea = useArea;
         this.rentFee = rentFee;
@@ -28,11 +28,11 @@ public abstract class Services {
         this.serviceName = serviceName;
     }
 
-    public String getUseArea() {
+    public double getUseArea() {
         return useArea;
     }
 
-    public void setUseArea(String useArea) {
+    public void setUseArea(double useArea) {
         this.useArea = useArea;
     }
 
