@@ -4,17 +4,22 @@ import CaseStudy.Models.House;
 import CaseStudy.Models.Room;
 import CaseStudy.Models.Villa;
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class FuncWriteFileCSV {
     private static final char DEFAULT_SEPARATOR = ',';
     private static final char DEFAULT_QUOTE = '"';
+    private static final int NUM_OF_LINE_SKIP =1;
     private static String pathVilla = "src/CaseStudy/data/Villa.csv";
-    private static String[] headerRecordVilla = new String[]{ "serviceName", "useArea","rentFee","maxOfPeople",
+    private static String[] headerRecordVilla = new String[]{"serviceName", "useArea","rentFee","maxOfPeople",
             "rentType","id","standardRoom","otherComfortDescription","poolArea","numberOfFloors"};
     public static void writeVillaToFileCSV(ArrayList<Villa> arrayList){
         try(Writer writer = new FileWriter(pathVilla);
@@ -91,5 +96,89 @@ public class FuncWriteFileCSV {
         catch (IOException ex){
             System.out.println(ex.getMessage());
         }
+    }
+
+    public static ArrayList<Villa>getVillaFromCSV(){
+        Path path = Paths.get(pathVilla);
+        if (!Files.exists(path)){
+            try {
+                Writer writer = new FileWriter(pathVilla);
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        ColumnPositionMappingStrategy<Villa> strategy = new ColumnPositionMappingStrategy<>();
+        strategy.setType(Villa.class);
+        strategy.setColumnMapping(headerRecordVilla);
+
+        CsvToBean<Villa> csvToBean = null;
+        try {
+            csvToBean = new CsvToBeanBuilder<Villa>(new FileReader(pathVilla))
+                    .withMappingStrategy(strategy)
+                    .withSeparator(DEFAULT_SEPARATOR)
+                    .withQuoteChar(DEFAULT_QUOTE)
+                    .withSkipLines(NUM_OF_LINE_SKIP)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+        }catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return (ArrayList<Villa>)csvToBean.parse();
+    }
+
+    public static ArrayList<Room>getRoomFromCSV(){
+        Path path = Paths.get(pathRoom);
+        if (!Files.exists(path)){
+            try {
+                Writer writer = new FileWriter(pathRoom);
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        ColumnPositionMappingStrategy<Room> strategy = new ColumnPositionMappingStrategy<>();
+        strategy.setType(Room.class);
+        strategy.setColumnMapping(headerRecordRoom);
+
+        CsvToBean<Room> csvToBean = null;
+        try {
+            csvToBean = new CsvToBeanBuilder<Room>(new FileReader(pathRoom))
+                    .withMappingStrategy(strategy)
+                    .withSeparator(DEFAULT_SEPARATOR)
+                    .withQuoteChar(DEFAULT_QUOTE)
+                    .withSkipLines(NUM_OF_LINE_SKIP)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+        }catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return (ArrayList<Room>)csvToBean.parse();
+    }
+
+    public static ArrayList<House>getHouseFromCSV(){
+        Path path = Paths.get(pathHouse);
+        if (!Files.exists(path)){
+            try {
+                Writer writer = new FileWriter(pathHouse);
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        ColumnPositionMappingStrategy<House> strategy = new ColumnPositionMappingStrategy<>();
+        strategy.setType(House.class);
+        strategy.setColumnMapping(headerRecordHouse);
+
+        CsvToBean<House> csvToBean = null;
+        try {
+            csvToBean = new CsvToBeanBuilder<House>(new FileReader(pathHouse))
+                    .withMappingStrategy(strategy)
+                    .withSeparator(DEFAULT_SEPARATOR)
+                    .withQuoteChar(DEFAULT_QUOTE)
+                    .withSkipLines(NUM_OF_LINE_SKIP)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+        }catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return (ArrayList<House>)csvToBean.parse();
     }
 }
