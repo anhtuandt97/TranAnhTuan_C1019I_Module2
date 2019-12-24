@@ -1,6 +1,8 @@
 package CaseStudy.Controllers;
 
 import CaseStudy.Commons.FuncWriteFileCSV;
+import CaseStudy.Models.House;
+import CaseStudy.Models.Room;
 import CaseStudy.Models.Services;
 import CaseStudy.Models.Villa;
 
@@ -66,12 +68,14 @@ public class MainController {
         services.setId(UUID.randomUUID().toString().replace("-",""));
         System.out.println("Enter name Service: ");
         services.setServiceName(sc.nextLine());
+        sc.nextLine();
         System.out.println("Enter Area Use: ");
         services.setUseArea(sc.nextDouble());
         System.out.println("Enter Rent Fee: ");
         services.setRentFee(sc.nextInt());
         System.out.println("Enter Max Of People:");
         services.setMaxOfPeople(sc.nextInt());
+        sc.nextLine();
         System.out.println("Enter Rent Type");
         services.setRentType(sc.nextLine());
         return services ;
@@ -80,7 +84,7 @@ public class MainController {
 
     public static void addNewVilla() {
         Services villa = new Villa();
-         addNewService(villa);
+        addNewService(villa);
         System.out.println("Enter Standard Room: ");
         ((Villa)villa).setStandardRoom(sc.nextLine());
         System.out.println("Other Comfort Description");
@@ -98,11 +102,33 @@ public class MainController {
     }
 
     public static void addNewHouse() {
+        Services house = new House();
+        addNewService(house);
+        System.out.println("Enter Standard Room: ");
+        ((House)house).setStandardRoom(sc.nextLine());
+        System.out.println("Other Comfort Description");
+        ((House)house).setOtherComfortDescription(sc.nextLine());
+        System.out.println("Number Of Floors");
+        ((House)house).setNumberOfFloors(sc.nextInt());
 
+        ArrayList<House> listHouse = new ArrayList<House>() ;
+        listHouse.add((House) house);
+        FuncWriteFileCSV.writeHouseToFileCSV(listHouse);
+        System.out.println("\n Add House: " + house.getServiceName()+ "OK");
+        backMainMenu();
     }
 
     public static void addNewRoom() {
+        Services room = new Room();
+        addNewService(room);
+        System.out.println("Service Free: ");
+        ((Room)room).setServiceFree(sc.nextLine());
 
+        ArrayList<Room> listRoom = new ArrayList<Room>() ;
+        listRoom.add((Room) room);
+        FuncWriteFileCSV.writeRoomToFileCSV(listRoom);
+        System.out.println("\n Add House: " + room.getServiceName()+ "OK");
+        backMainMenu();
     }
 
     public static void backMainMenu(){

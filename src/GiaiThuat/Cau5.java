@@ -16,7 +16,7 @@ public class Cau5 {
         for (int i = 1; i <= (2*n)-1 ; i++) {
             x = i*2-1;
             for (int j =1; j<=x; j++) {
-                x *= x;
+                x *= j;
             }
             temp = x;
             sum += (float) 1/temp;
