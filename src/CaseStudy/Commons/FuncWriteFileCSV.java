@@ -1,5 +1,6 @@
 package CaseStudy.Commons;
 
+import CaseStudy.Models.Customer;
 import CaseStudy.Models.House;
 import CaseStudy.Models.Room;
 import CaseStudy.Models.Villa;
@@ -98,6 +99,61 @@ public class FuncWriteFileCSV {
         }
     }
 
+    private static String pathCustomer = "src/CaseStudy/data/Customer.csv";
+    private static String[] headerRecordCustomer = new String[]{ "idCustomer","nameCustomer", "birthday","gender","idCard",
+            "phoneNumber","emailCustomer","typeCustomer","addressCustomer"};
+    public static void writeCustomerToFileCSV(ArrayList<Customer> arrayList){
+        try(Writer writer = new FileWriter(pathCustomer);
+            CSVWriter csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR,CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);) {
+            csvWriter.writeNext(headerRecordCustomer);
+            for(Customer customer: arrayList) {
+                csvWriter.writeNext(new String[]{
+                        customer.getIdCustomer(),
+                        customer.getNameCustomer(),
+                        customer.getBirthday(),
+                        customer.getGender(),
+                        String.valueOf(customer.getIdCard()),
+                        String.valueOf(customer.getPhoneNumber()),
+                        customer.getEmailCustomer(),
+                        customer.getTypeCustomer(),
+                        customer.getAddressCustomer()
+                });
+            }
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static ArrayList<Customer>getCustomerFromCSV(){
+        Path path = Paths.get(pathCustomer);
+        if (!Files.exists(path)){
+            try {
+                Writer writer = new FileWriter(pathCustomer);
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        ColumnPositionMappingStrategy<Customer> strategy = new ColumnPositionMappingStrategy<>();
+        strategy.setType(Customer.class);
+        strategy.setColumnMapping(headerRecordCustomer);
+
+        CsvToBean<Customer> csvToBean = null;
+        try {
+            csvToBean = new CsvToBeanBuilder<Customer>(new FileReader(pathCustomer))
+                    .withMappingStrategy(strategy)
+                    .withSeparator(DEFAULT_SEPARATOR)
+                    .withQuoteChar(DEFAULT_QUOTE)
+                    .withSkipLines(NUM_OF_LINE_SKIP)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+        }catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return (ArrayList<Customer>)csvToBean.parse();
+    }
+
     public static ArrayList<Villa>getVillaFromCSV(){
         Path path = Paths.get(pathVilla);
         if (!Files.exists(path)){
@@ -180,5 +236,68 @@ public class FuncWriteFileCSV {
             System.out.println(ex.getMessage());
         }
         return (ArrayList<House>)csvToBean.parse();
+    }
+
+    private static String pathBooking = "src/CaseStudy/data/Booking.csv";
+    private static String[] headerRecordBooking = new String[]{"idCustomer","nameCustomer", "birthday","gender","idCard",
+            "phoneNumber","emailCustomer","typeCustomer","addressCustomer","serviceName", "useArea","rentFee","maxOfPeople",
+            "rentType","id"};
+    public static ArrayList<Customer>getBookingFromCSV(){
+        Path path = Paths.get(pathBooking);
+        if (!Files.exists(path)){
+            try {
+                Writer writer = new FileWriter(pathBooking);
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        ColumnPositionMappingStrategy<Customer> strategy = new ColumnPositionMappingStrategy<>();
+        strategy.setType(Customer.class);
+        strategy.setColumnMapping(headerRecordBooking);
+
+        CsvToBean<Customer> csvToBean = null;
+        try {
+            csvToBean = new CsvToBeanBuilder<Customer>(new FileReader(pathBooking))
+                    .withMappingStrategy(strategy)
+                    .withSeparator(DEFAULT_SEPARATOR)
+                    .withQuoteChar(DEFAULT_QUOTE)
+                    .withSkipLines(NUM_OF_LINE_SKIP)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+        }catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return (ArrayList<Customer>)csvToBean.parse();
+    }
+
+    public static void writeBookingToFileCSV(ArrayList<Customer> arrayList){
+        try(Writer writer = new FileWriter(pathBooking);
+            CSVWriter csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR,CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);) {
+            csvWriter.writeNext(headerRecordBooking);
+            for(Customer customer: arrayList) {
+                csvWriter.writeNext(new String[]{
+                        customer.getIdCustomer(),
+                        customer.getNameCustomer(),
+                        customer.getBirthday(),
+                        customer.getGender(),
+                        String.valueOf(customer.getIdCard()),
+                        String.valueOf(customer.getPhoneNumber()),
+                        customer.getEmailCustomer(),
+                        customer.getTypeCustomer(),
+                        customer.getAddressCustomer(),
+                        customer.getServices().getServiceName(),
+                        String.valueOf(customer.getServices().getUseArea()),
+                        String.valueOf(customer.getServices().getRentFee()),
+                        String.valueOf(customer.getServices().getMaxOfPeople()),
+                        customer.getServices().getRentType(),
+                        customer.getServices().getId(),
+
+                });
+            }
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 }
