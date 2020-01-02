@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class FuncWriteFileCSV {
     private static final char DEFAULT_SEPARATOR = ',';
@@ -105,7 +106,7 @@ public class FuncWriteFileCSV {
     public static void writeCustomerToFileCSV(ArrayList<Customer> arrayList){
         try(Writer writer = new FileWriter(pathCustomer);
             CSVWriter csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR,CSVWriter.NO_QUOTE_CHARACTER,
-                    CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);) {
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)) {
             csvWriter.writeNext(headerRecordCustomer);
             for(Customer customer: arrayList) {
                 csvWriter.writeNext(new String[]{
@@ -299,5 +300,33 @@ public class FuncWriteFileCSV {
         catch (IOException ex){
             System.out.println(ex.getMessage());
         }
+    }
+    public static TreeSet<String>getAllServiceFromCSV(String path){
+        BufferedReader br = null;
+        TreeSet<String>result = new TreeSet<String>();
+        try {
+            String line;
+            br = new BufferedReader(new FileReader(path));
+            while(( br.readLine() !=null)){
+                line=br.readLine();
+                if(getNameServiceFromFile(line).equals("NameService")){
+                    continue;
+                }
+                result.add(getNameServiceFromFile(line));
+            }
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        return result;
+    }
+
+    public  static TreeSet<String> getNameServiceFromFile(String scvLine) {
+        String name = "";
+        if (scvLine != null){
+            String[] splitData = scvLine.split(",");
+            name = splitData[1];
+        }
+        return name;
     }
 }

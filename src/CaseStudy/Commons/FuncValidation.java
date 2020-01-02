@@ -50,7 +50,7 @@ public class FuncValidation {
     }
 
     public static boolean checkBirthday(String str) {
-        regex ="^(0[1-9]|[1-2][0-9]|3[0-1])\\/(0[1-9]|1[0-2])\\/(19[9][0-9]|200[0-2])$" ;
+        regex ="^(0[1-9]|[1-2][0-9]|3[0-1])\\/(0[1-9]|1[0-2])\\/(19[0-9]{2}|200[0-2])$" ;
         return str.matches(regex);
     }
     public static boolean checkIDCard(String str) {

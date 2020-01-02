@@ -1,17 +1,19 @@
 package B3_LopVaDoiTuongTrongJava.BaiTap.XayDungLopFan;
 
 public class Fan {
-    private int speech;
-    private boolean on;
-    private double radius;
-    private String collor;
+    private boolean on = false;
+    private int speech = 1;
+    private double radius = 5.0;
+    private String collor = "blue";
 
-    public int getSpeech() {
-        return speech;
+    public Fan() {
     }
 
-    public void setSpeech(int speech) {
+    public Fan(boolean on, int speech, double radius, String collor) {
+        this.on = on;
         this.speech = speech;
+        this.radius = radius;
+        this.collor = collor;
     }
 
     public boolean isOn() {
@@ -20,6 +22,14 @@ public class Fan {
 
     public void setOn(boolean on) {
         this.on = on;
+    }
+
+    public int getSpeech() {
+        return speech;
+    }
+
+    public void setSpeech(int speech) {
+        this.speech = speech;
     }
 
     public double getRadius() {
@@ -38,4 +48,16 @@ public class Fan {
         this.collor = collor;
     }
 
+    @Override
+    public String toString() {
+        if(this.on=true){
+            return  "Fan is on: "
+                    +"\nSpeech = " + getSpeech()
+                    +"\nColor = " + getCollor()
+                    +"\nradius = " + getRadius();
+        }else{
+            return "Fan is off";
+        }
+
+    }
 }

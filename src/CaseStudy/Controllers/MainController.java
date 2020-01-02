@@ -4,9 +4,11 @@ import CaseStudy.Commons.FuncValidation;
 import CaseStudy.Commons.FuncWriteFileCSV;
 import CaseStudy.Models.*;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
+import javax.swing.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class MainController {
     private static Scanner sc = new Scanner(System.in);
@@ -17,7 +19,8 @@ public class MainController {
                 + "3.Add New Customer\n"
                 + "4.Show Information Customer\n"
                 + "5.Add New Booking Resort\n"
-                + "6.Exit\n");
+                + "6.Show Information Employee\n"
+                + "7.Exit\n");
         int choose = sc.nextInt();
         switch (choose) {
             case 1:
@@ -37,6 +40,7 @@ public class MainController {
                 addNewBookingResort();
                 break;
             case 6:
+            case 7:
                 System.exit(0);
             default:
                 System.out.println("Loi!!! Back to menu");
@@ -80,7 +84,7 @@ public class MainController {
                 + "3. Show New Room\n"
                 + "4. Show All Name Villa Not Duplicate\n"
                 + "5. Show All Name House Not Duplicate\n"
-                + "6. Show All Name Name Not Duplicate\n"
+                + "6. Show All Name Room Not Duplicate\n"
                 + "7. Back to menu\n"
                 + "8. Exit\n");
         switch (sc.nextInt()) {
@@ -94,14 +98,77 @@ public class MainController {
                 showAllRoom();
                 break;
             case 4:
-                backMainMenu();
+                showAllNameVillaNoDuplicate();
+                break;
             case 5:
+                showAllNameHouseNoDuplicate();
+                break;
+            case 6:
+                showAllNameRoomNoDuplicate();
+                break;
+            case 7:
+                backMainMenu();
+            case 8:
                 System.exit(0);
             default:
                 System.out.println("Loi!!! Back to menu");
                 backMainMenu();
         }
     }
+    private static void showAllNameVillaNoDuplicate(){
+        String pathVilla = "src/Villa/House.csv";
+        Path path = Paths.get(pathVilla);
+        if(!Files.exists(path)){
+            System.out.println("File House does not exist!");
+        }
+        else {
+            TreeSet<String> listVillaTreeSet = FuncWriteFileCSV.getNameServiceFromFile(pathVilla);
+            System.out.println("List all name villa not duplicate: ");
+            for(String str : listVillaTreeSet){
+                System.out.println(str);
+                System.out.println("------------------");
+            }
+        }
+        sc.nextLine();
+        displayMainMenu();
+    }
+
+    private static void showAllNameHouseNoDuplicate() {
+        Scanner sc = new Scanner(System.in);
+        String pathHouse = "src/Data/House.csv";
+        Path path = Paths.get(pathHouse);
+        if(!Files.exists(path)){
+            System.out.println("File House does not exist!");
+        } else {
+            TreeSet<String> listHouseTreeSet = FuncWriteFileCSV.getNameServiceFromFile(pathHouse);
+            System.out.println("List all name house not duplicate: ");
+            for(String str : listHouseTreeSet){
+                System.out.println(str);
+                System.out.println("------------------");
+            }
+        }
+        sc.nextLine();
+        displayMainMenu();
+    }
+
+    private static void showAllNameRoomNoDuplicate() {
+        Scanner sc = new Scanner(System.in);
+        String pathRoom = "src/Data/Room.csv";
+        Path path = Paths.get(pathRoom);
+        if(!Files.exists(path)){
+            System.out.println("File Room does not exist!");
+        } else {
+            TreeSet<String> listRoomTreeSet = FuncWriteFileCSV.getNameServiceFromFile(pathRoom);
+            System.out.println("List all name house not duplicate: ");
+            for(String str : listRoomTreeSet){
+                System.out.println(str);
+                System.out.println("------------------");
+            }
+        }
+        sc.nextLine();
+        displayMainMenu();
+    }
+
 
     private static Services addNewService(Services services) {
         String content = "";
@@ -303,7 +370,7 @@ public class MainController {
         System.out.println("Enter Birthday Customer(DD/MM/YYYY): ");
         customer.setBirthday(sc.nextLine());
         while(!FuncValidation.checkBirthday(customer.getBirthday())){
-            System.out.println("Birthday Customer is validate. Year from 1990 to 2002. Please try again!!!");
+            System.out.println("Birthday Customer is validate. Year from 1900 to 2002. Please try again!!!");
             System.out.println("Enter Birthday Customer: ");
             customer.setBirthday(sc.nextLine());
         }
@@ -461,6 +528,7 @@ public class MainController {
         }
 
     }
+
 
     public static void backMainMenu () {
         System.out.println("\n Enter continue...");
