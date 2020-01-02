@@ -301,7 +301,7 @@ public class FuncWriteFileCSV {
             System.out.println(ex.getMessage());
         }
     }
-    public static TreeSet<String>getAllServiceFromCSV(String path){
+    public static TreeSet<String>getAllNameServiceFromCSV(String path){
         BufferedReader br = null;
         TreeSet<String>result = new TreeSet<String>();
         try {
@@ -309,7 +309,7 @@ public class FuncWriteFileCSV {
             br = new BufferedReader(new FileReader(path));
             while(( br.readLine() !=null)){
                 line=br.readLine();
-                if(getNameServiceFromFile(line).equals("NameService")){
+                if(getNameServiceFromFile(line).equals("serviceName")){
                     continue;
                 }
                 result.add(getNameServiceFromFile(line));
@@ -321,11 +321,11 @@ public class FuncWriteFileCSV {
         return result;
     }
 
-    public  static TreeSet<String> getNameServiceFromFile(String scvLine) {
+    public  static String getNameServiceFromFile(String scvLine) {
         String name = "";
         if (scvLine != null){
             String[] splitData = scvLine.split(",");
-            name = splitData[1];
+            name = splitData[0];
         }
         return name;
     }

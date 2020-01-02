@@ -4,7 +4,6 @@ import CaseStudy.Commons.FuncValidation;
 import CaseStudy.Commons.FuncWriteFileCSV;
 import CaseStudy.Models.*;
 
-import javax.swing.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -116,15 +115,17 @@ public class MainController {
         }
     }
     private static void showAllNameVillaNoDuplicate(){
-        String pathVilla = "src/Villa/House.csv";
+        String pathVilla = "src/CaseStudy/data/Villa.csv";
         Path path = Paths.get(pathVilla);
         if(!Files.exists(path)){
-            System.out.println("File House does not exist!");
+            System.out.println("File Villa does not exist!");
         }
         else {
-            TreeSet<String> listVillaTreeSet = FuncWriteFileCSV.getNameServiceFromFile(pathVilla);
-            System.out.println("List all name villa not duplicate: ");
+            TreeSet<String> listVillaTreeSet = FuncWriteFileCSV.getAllNameServiceFromCSV(pathVilla);
+            System.out.println("List all name Villa not duplicate: ");
+
             for(String str : listVillaTreeSet){
+                System.out.println("------------------");
                 System.out.println(str);
                 System.out.println("------------------");
             }
@@ -135,13 +136,13 @@ public class MainController {
 
     private static void showAllNameHouseNoDuplicate() {
         Scanner sc = new Scanner(System.in);
-        String pathHouse = "src/Data/House.csv";
+        String pathHouse = "src/CaseStudy/data/House.csv";
         Path path = Paths.get(pathHouse);
         if(!Files.exists(path)){
             System.out.println("File House does not exist!");
         } else {
-            TreeSet<String> listHouseTreeSet = FuncWriteFileCSV.getNameServiceFromFile(pathHouse);
-            System.out.println("List all name house not duplicate: ");
+            TreeSet<String> listHouseTreeSet = FuncWriteFileCSV.getAllNameServiceFromCSV(pathHouse);
+            System.out.println("List all name House not duplicate: ");
             for(String str : listHouseTreeSet){
                 System.out.println(str);
                 System.out.println("------------------");
@@ -153,13 +154,13 @@ public class MainController {
 
     private static void showAllNameRoomNoDuplicate() {
         Scanner sc = new Scanner(System.in);
-        String pathRoom = "src/Data/Room.csv";
+        String pathRoom = "src/CaseStudy/data/Room.csv";
         Path path = Paths.get(pathRoom);
         if(!Files.exists(path)){
             System.out.println("File Room does not exist!");
         } else {
-            TreeSet<String> listRoomTreeSet = FuncWriteFileCSV.getNameServiceFromFile(pathRoom);
-            System.out.println("List all name house not duplicate: ");
+            TreeSet<String> listRoomTreeSet = FuncWriteFileCSV.getAllNameServiceFromCSV(pathRoom);
+            System.out.println("List all name Room not duplicate: ");
             for(String str : listRoomTreeSet){
                 System.out.println(str);
                 System.out.println("------------------");

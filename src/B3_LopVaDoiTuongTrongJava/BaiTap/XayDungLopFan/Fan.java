@@ -17,7 +17,7 @@ public class Fan {
     }
 
     public boolean isOn() {
-        return on;
+        return this.on;
     }
 
     public void setOn(boolean on) {
@@ -50,14 +50,17 @@ public class Fan {
 
     @Override
     public String toString() {
-        if(this.on=true){
-            return  "Fan is on: "
+        if(isOn() == false){
+            return " is off:"
+                    +"\nColor = " + getCollor()
+                    +"\nradius = " + getRadius()
+                    +"\n----------------------------------------------";
+        }else {
+            return  " is on: "
                     +"\nSpeech = " + getSpeech()
                     +"\nColor = " + getCollor()
-                    +"\nradius = " + getRadius();
-        }else{
-            return "Fan is off";
+                    +"\nradius = " + getRadius()
+                    +"\n----------------------------------------------";
         }
-
     }
 }
