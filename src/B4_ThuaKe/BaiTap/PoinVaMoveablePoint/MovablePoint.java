@@ -48,7 +48,8 @@ public class MovablePoint extends Point {
                 Arrays.toString(getXY()) +"\n" +
                 "Speed chieu rong la: " + getXSpeed() + "\n" +
                 " Speed chieu dai la: " + getYSpeed() + "\n" +
-                Arrays.toString(getSpeed());
+                Arrays.toString(getSpeed())+
+                "\n--------------------------------------------";
     }
 
     public void move(){

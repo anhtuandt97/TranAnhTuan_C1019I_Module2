@@ -31,7 +31,7 @@ public class StopWatch {
     public static void main(String[] args) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        for (long i = 0; i < 10000000; i++) {
+        for (long i = 0; i < 100000000; i++) {
             Math.random();
         }
         stopWatch.end();

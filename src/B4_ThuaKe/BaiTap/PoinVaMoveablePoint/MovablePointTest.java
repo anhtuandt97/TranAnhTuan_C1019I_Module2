@@ -14,9 +14,10 @@ public class MovablePointTest {
         movablePoint.setXSpeed(sc.nextFloat());
         System.out.println("Nhap vao speed chieu dai: ");
         movablePoint.setYSpeed(sc.nextFloat());
-        System.out.println("Xuat ra : ");
+        System.out.println("Trước khi dịch chuyển: ");
         System.out.println(movablePoint);
         movablePoint.move();
+        System.out.println("Sau khi dịch chuyển: ");
         System.out.println(movablePoint);
 
     }

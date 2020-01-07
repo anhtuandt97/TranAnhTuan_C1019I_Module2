@@ -3,31 +3,30 @@ package B6_CauTrucDuLieuVaGiaiThuat.ThucHanh.TrienKhaiLopListDonGian;
 import java.util.Arrays;
 
 public class MyList<E> {
-    private int size = 0;
-    private static final int DEFAULT_CAPACITY = 10;
+    private int size =0;
+    private static final int DEFAULT_CAPACITY =10;
     private Object elements[];
 
-    public MyList() {
+    public MyList(){
         elements = new Object[DEFAULT_CAPACITY];
     }
 
-    private void ensureCapa() {
-        int newSize = elements.length * 2;
-        elements = Arrays.copyOf(elements, newSize);
+    private void ensureCapa(){
+        int newSide = elements.length*2;
+        elements = Arrays.copyOf(elements,newSide);
     }
 
-    public void add(E e) {
-        if (size == elements.length) {
+    public void add(E e){
+        if(size==elements.length){
             ensureCapa();
         }
         elements[size++] = e;
     }
 
-    public E get(int i) {
-        if (i >= size || i < 0) {
+    public E get(int i){
+        if(i>= size || i<0){
             throw new IndexOutOfBoundsException("Index: " + i + ", Size " + i);
         }
         return (E) elements[i];
     }
-
 }
